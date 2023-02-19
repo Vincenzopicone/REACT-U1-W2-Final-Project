@@ -25,18 +25,20 @@ const Gallery = () => {
 
   
     return (
-    <Container>
+    <Container className="p-0">
       <Row className="d-flex justify-content-center my-4">
          <Form className="w-50"  onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
           <Form.Control type="search" placeholder="Inserisci la città" /* value={} */ onChange={ (e)=> handleChange (dispatch({type: "SEARCH", payload: e.target.value}))}/>
           </Form.Group>
           </Form>
-      </Row>
-   
-    <section>
-        <CardWeather/>   
-    </section>
+      </Row>   
+
+      <Container className="d-flex p-0">
+        <CardWeather md={6}/> 
+        <CardWeather md={6}/>
+      </Container>  
+
     </Container>
 
     )

@@ -42,41 +42,36 @@ function CardWeather() {
 
   return (
 
-    <Container>
-      <Row className='flex-column justify-content-center align-items-center mb-4'>
-        <Col md={5} className="text-center">
+    <Container className="d-flex flex-column justify-content-center align-items-center p-0">
+      <Row md={3} className='flex-column align-items-start mb-4'>
+        <Col md={12} className="text-center">
         <h1 className='cardWeather bg-secondary text-light p-2'><strong>{currentCityName},  {currentCountry.country} </strong></h1>
         </Col>      
-        <Col md={5} className="text-center uppercase">
-          <h2 className='cardWeather  bg-secondary text-light description m-3'>{currentWeather.description} <span><img src={`http://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`} alt="CurrentIcon" /></span></h2>
+        <Col md={12} className="text-center uppercase">
+          <h3 className='cardWeather  bg-secondary text-light description px-3 m-3'>{currentWeather.description} <span><img src={`http://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`} alt="CurrentIcon" /></span></h3>
         </Col>
       </Row>
-      <Row>
-        <Col md={2} className='cardWeather  p-2 mx-3 my-2 d-flex flex-column justify-content-center align-items-center'>
-           <h3> Attuale</h3>
-           <h2>{currentTemp.temp}°</h2>                     
+      <Row md={6}>
+        <Col md={5} className='cardWeather  p-2 mx-1 my-2 d-flex flex-column justify-content-center align-items-center'>
+           <h5> Attuale</h5>
+           <h3>{currentTemp.temp}°</h3> 
+           <h5> Percepita</h5>
+           <h3>{currentTemp.feels_like}°</h3>                      
         </Col>
-        <Col md={2} className='cardWeather  p-2  mx-3 my-2  d-flex flex-column justify-content-center align-items-center'>
-           <h3> Minima</h3>
-           <h2>{currentTemp.temp_min}°</h2>                     
+        <Col md={5} className='cardWeather  p-2  mx-1 my-2  d-flex flex-column justify-content-center align-items-center'>
+           <h5> Minima</h5>
+           <h3>{currentTemp.temp_min}°</h3>
+           <h5> Massima</h5>
+           <h3>{currentTemp.temp_max}°</h3>                     
         </Col>
-        <Col md={2} className='cardWeather  p-2 mx-3 my-2  d-flex flex-column justify-content-center align-items-center'>
-           <h3> Massima</h3>
-           <h2>{currentTemp.temp_max}°</h2>                     
-        </Col>
-        <Col md={2} className='cardWeather  p-2 mx-3 my-2  d-flex flex-column justify-content-center align-items-center'>
-           <h3> Percepita</h3>
-           <h2>{currentTemp.feels_like}°</h2>                     
-        </Col>
-        <Col md={2} className='cardWeather  p-2 mx-3 my-2  d-flex flex-column justify-content-center align-items-center'>
-           <h3> Vento</h3>
-           <h2>{currentWind.speed} km/h</h2>                     
+        <Col md={5} className='cardWeather  p-2 mx-1 my-2  d-flex flex-column justify-content-center align-items-center'>
+           <h5> Vento</h5>
+           <h3>{currentWind.speed} km/h</h3>
+           <h5> Pressione</h5>
+           <h3>{currentTemp.pressure} hPa</h3>                     
         </Col>
       </Row>
-  
     </Container>
-
-
   
   );
 }
