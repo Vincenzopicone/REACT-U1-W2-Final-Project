@@ -1,18 +1,69 @@
 const initialState = {
-  favourites: [],
-  city: { city: {} },
+  city: {},
+  name: "Scilla",
+  country: { country: "IT" },
+  weather: [],
+  temp: {},
+  wind: {},
   search: {},
 };
 
 const appReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "CURRENT":
+    case "CITY":
       return (state = {
         ...state,
-        city: {
-          city: action.payload.city,
-        },
+        name: action.payload,
       });
+
+    case "COUNTRY":
+      return (state = {
+        ...state,
+        country: action.payload,
+      });
+
+    case "LON":
+      return (state = {
+        ...state,
+        lon: action.payload,
+      });
+
+    case "LAT":
+      return (state = {
+        ...state,
+        lat: action.payload,
+      });
+
+    case "WEATHER":
+      return (state = {
+        ...state,
+        weather: action.payload,
+      });
+
+    case "TEMP":
+      return (state = {
+        ...state,
+        temp: action.payload,
+      });
+
+    case "WIND":
+      return (state = {
+        ...state,
+        wind: action.payload,
+      });
+
+    case "SEARCH":
+      return (state = {
+        ...state,
+        search: action.payload,
+      });
+
+    /* case "CURRENT":
+      return (state = {
+        ...state.city,
+        city: action.payload,
+      }); */
+
     /* 
     case "SEARCH":
       return (state = {
@@ -20,11 +71,11 @@ const appReducer = (state = initialState, action) => {
         search: action.payload,
       }); */
 
-    case "ADD_TO_FAV":
+    /* case "ADD_TO_FAV":
       return (state = {
         ...state,
         favourites: [...state.favourites, action.payload.city],
-      });
+      }); */
     default:
       return state;
   }

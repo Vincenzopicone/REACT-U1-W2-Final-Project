@@ -1,24 +1,34 @@
-import Button from 'react-bootstrap/Button';
+/* import Button from 'react-bootstrap/Button'; */
 import Card from 'react-bootstrap/Card';
 import { useSelector, useDispatch } from "react-redux";
-
 import { useEffect } from "react";
+import {Container, Col, Row} from "react-bootstrap"
 
 
-function CardWeather(props) {
-    const weatherContent = useSelector((state) => state.city)
-    console.log(weatherContent)
-    const dispatch = useDispatch();
-    const name = props.city;
+function CardWeather(props) { 
+  const dispatch = useDispatch(); 
+    const currentCityName = useSelector((city) => city.name)
+    const currentCountry = useSelector((country)=> country.country)
+    const currentWeather = useSelector((current)=> current.weather)
+    const currentTemp = useSelector((current)=> current.temp)
+    const currentWind = useSelector((current)=> current.wind)
 
    
-
-    const getWeather = async () => {        
+    const getCity = async () => {  
+     
+    
         try {
-          const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${name}&appid=d9bf63aa82f94227711a4145cb292000&units=metric`)
+          const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${currentCityName}&appid=d9bf63aa82f94227711a4145cb292000&units=metric`)
           if (response.ok) {
             const data = await response.json()
-            dispatch({type:"CURRENT", payload:{city: data}})
+            dispatch({type:"CITY", payload: data.name})
+            dispatch({type:"COUNTRY", payload: data.sys})       
+            dispatch({type:"LAT", payload:data.coord.lat})
+            dispatch({type:"LON", payload:data.coord.lon})
+            dispatch({type: "WEATHER", payload: data.weather})
+            dispatch({type: "TEMP", payload: data.main})
+            dispatch({type: "WIND", payload: data.wind})
+            
           } else {
             alert('Error fetching results')
           }
@@ -27,25 +37,77 @@ function CardWeather(props) {
         }
       }
 
-      useEffect(()=> {
-        getWeather()
-      },[])
+    
+        useEffect(() => {
+        getCity()
+      },[currentCityName])
 
   return (
-    <Card style={{ width: '18rem' }} className="text-center bg-dark">
+
+    <Container>
+      <Row className='justify-content-between mb-4'>
+        <Col md={4} className="text-center">
+        <h1 className='cardWeather p-2'><strong>{currentCityName},  {currentCountry.country}</strong></h1>
+        </Col>
+      </Row>
+      <Row>
+      <Col md={4} className="text-center mb-4">
+        {/*   <h3 className='cardWeather p-2' >{currentWeather.main}</h3> */}
+        </Col>
+      </Row>
+      <Row>
+        <Col md={2} className='cardWeather  p-2 mx-3 d-flex flex-column justify-content-center align-items-center'>
+           <h3> Attuale</h3>
+           <h2>{currentTemp.temp}°</h2>                     
+        </Col>
+        <Col md={2} className='cardWeather  p-2  mx-3  d-flex flex-column justify-content-center align-items-center'>
+           <h3> Minima</h3>
+           <h2>{currentTemp.temp_min}°</h2>                     
+        </Col>
+        <Col md={2} className='cardWeather  p-2 mx-3  d-flex flex-column justify-content-center align-items-center'>
+           <h3> Massima</h3>
+           <h2>{currentTemp.temp_max}°</h2>                     
+        </Col>
+        <Col md={2} className='cardWeather  p-2 mx-3  d-flex flex-column justify-content-center align-items-center'>
+           <h3> Percepita</h3>
+           <h2>{currentTemp.feels_like}°</h2>                     
+        </Col>
+        <Col md={2} className='cardWeather  p-2 mx-3  d-flex flex-column justify-content-center align-items-center'>
+           <h3> Vento</h3>
+           <h2>{currentWind.speed} km/h</h2>                     
+        </Col>
+      </Row>
+      <Row>
+        <Col md={6}>
+        </Col>
+        <Col md={6}>
+        </Col>
+      </Row>
+    </Container>
+
+
+  
+  );
+}
+
+export default CardWeather;
+
+
+  {/* <Card style={{ width: '18rem' }} className="text-center bg-dark">
       <Card.Body key={weatherContent.city.id}>
-        <Card.Title className='text-light'><h3><strong>{weatherContent.city.name}, {weatherContent.city.sys.country}</strong></h3></Card.Title>
-        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>Temperatura:{weatherContent.city.main.temp.toFixed(0)}°</Card.Text>
-        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>Min:{weatherContent.city.main.temp_min.toFixed(0)}°</Card.Text>
-        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>Max:{weatherContent.city.main.temp_max.toFixed(0)}°</Card.Text>
-        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>Lat: {weatherContent.city.coord.lat} ° Lon: {weatherContent.city.coord.lon} °</Card.Text>
+        <Card.Title className='text-light'><h3><strong>{currentCityName}, {currentCountry.country}</strong></h3></Card.Title>
+        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>Temperatura:{currentTemp.temp}°</Card.Text>
+        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>Min:{currentTemp.temp_min}°</Card.Text>
+        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>Max:{currentTemp.temp_max}°</Card.Text>
+        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>Percepita:{currentTemp.feels_like}°</Card.Text>
+        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>Lat: {currentLat} ° Lon: {currentLon} °</Card.Text>
+        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>{currentWeather[0].main}</Card.Text>
+        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>{currentWeather[0].descriptions}</Card.Text>
+
         <Button variant="success" onClick={()=>{dispatch({
          type: "ADD_TO_FAV",
          payload: weatherContent
     })}}>Aggiungi ai preferiti</Button>
       </Card.Body>
-    </Card>
-  );
-}
 
-export default CardWeather;
+    </Card> */}
