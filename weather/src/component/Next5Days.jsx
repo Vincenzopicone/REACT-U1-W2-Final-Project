@@ -15,7 +15,6 @@ function Next5Days() {
           const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${currentCityName}&appid=d9bf63aa82f94227711a4145cb292000&units=metric`)
           if (response.ok) {
             const daily = await response.json();
-            console.log(daily)
             dispatch({type: "NEXT_5_DAYS", payload: daily})
             
           } else {
@@ -42,7 +41,7 @@ function Next5Days() {
             <h5>Fra {i+1} giorno</h5>
             <article>
                 <p>Temperatura:</p>
-                <h3>{day.main.temp} °</h3>
+                <h3>{(day.main.temp).toFixed(0)} °</h3>
                 <p>Previsioni:</p>
                 <p className="description">{day.weather[0].description}</p>
                 <img src={`http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`} alt="CurrentIcon" />
