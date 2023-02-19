@@ -17,3 +17,7 @@ body {
   background-color: white;
   border-radius: 30px;
 }
+
+.description {
+    text-transform: uppercase;
+}

@@ -1,11 +1,11 @@
-/* import Button from 'react-bootstrap/Button'; */
-import Card from 'react-bootstrap/Card';
+/* import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card'; */
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import {Container, Col, Row} from "react-bootstrap"
 
 
-function CardWeather(props) { 
+function CardWeather() { 
   const dispatch = useDispatch(); 
     const currentCityName = useSelector((city) => city.name)
     const currentCountry = useSelector((country)=> country.country)
@@ -23,9 +23,7 @@ function CardWeather(props) {
             const data = await response.json()
             dispatch({type:"CITY", payload: data.name})
             dispatch({type:"COUNTRY", payload: data.sys})       
-            dispatch({type:"LAT", payload:data.coord.lat})
-            dispatch({type:"LON", payload:data.coord.lon})
-            dispatch({type: "WEATHER", payload: data.weather})
+            dispatch({type: "WEATHER", payload: data.weather[0]})
             dispatch({type: "TEMP", payload: data.main})
             dispatch({type: "WIND", payload: data.wind})
             
@@ -45,44 +43,37 @@ function CardWeather(props) {
   return (
 
     <Container>
-      <Row className='justify-content-between mb-4'>
-        <Col md={4} className="text-center">
-        <h1 className='cardWeather p-2'><strong>{currentCityName},  {currentCountry.country}</strong></h1>
+      <Row className='flex-column justify-content-center align-items-center mb-4'>
+        <Col md={5} className="text-center">
+        <h1 className='cardWeather bg-secondary text-light p-2'><strong>{currentCityName},  {currentCountry.country} </strong></h1>
+        </Col>      
+        <Col md={5} className="text-center uppercase">
+          <h2 className='cardWeather  bg-secondary text-light description m-3'>{currentWeather.description} <span><img src={`http://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`} alt="CurrentIcon" /></span></h2>
         </Col>
       </Row>
       <Row>
-      <Col md={4} className="text-center mb-4">
-        {/*   <h3 className='cardWeather p-2' >{currentWeather.main}</h3> */}
-        </Col>
-      </Row>
-      <Row>
-        <Col md={2} className='cardWeather  p-2 mx-3 d-flex flex-column justify-content-center align-items-center'>
+        <Col md={2} className='cardWeather  p-2 mx-3 my-2 d-flex flex-column justify-content-center align-items-center'>
            <h3> Attuale</h3>
            <h2>{currentTemp.temp}°</h2>                     
         </Col>
-        <Col md={2} className='cardWeather  p-2  mx-3  d-flex flex-column justify-content-center align-items-center'>
+        <Col md={2} className='cardWeather  p-2  mx-3 my-2  d-flex flex-column justify-content-center align-items-center'>
            <h3> Minima</h3>
            <h2>{currentTemp.temp_min}°</h2>                     
         </Col>
-        <Col md={2} className='cardWeather  p-2 mx-3  d-flex flex-column justify-content-center align-items-center'>
+        <Col md={2} className='cardWeather  p-2 mx-3 my-2  d-flex flex-column justify-content-center align-items-center'>
            <h3> Massima</h3>
            <h2>{currentTemp.temp_max}°</h2>                     
         </Col>
-        <Col md={2} className='cardWeather  p-2 mx-3  d-flex flex-column justify-content-center align-items-center'>
+        <Col md={2} className='cardWeather  p-2 mx-3 my-2  d-flex flex-column justify-content-center align-items-center'>
            <h3> Percepita</h3>
            <h2>{currentTemp.feels_like}°</h2>                     
         </Col>
-        <Col md={2} className='cardWeather  p-2 mx-3  d-flex flex-column justify-content-center align-items-center'>
+        <Col md={2} className='cardWeather  p-2 mx-3 my-2  d-flex flex-column justify-content-center align-items-center'>
            <h3> Vento</h3>
            <h2>{currentWind.speed} km/h</h2>                     
         </Col>
       </Row>
-      <Row>
-        <Col md={6}>
-        </Col>
-        <Col md={6}>
-        </Col>
-      </Row>
+  
     </Container>
 
 

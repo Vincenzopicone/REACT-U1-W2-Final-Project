@@ -2,7 +2,7 @@ const initialState = {
   city: {},
   name: "Scilla",
   country: { country: "IT" },
-  weather: [],
+  weather: {},
   temp: {},
   wind: {},
   search: {},
