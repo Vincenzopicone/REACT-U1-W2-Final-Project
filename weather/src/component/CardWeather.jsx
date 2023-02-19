@@ -28,7 +28,7 @@ function CardWeather() {
             dispatch({type: "WIND", payload: data.wind})
             
           } else {
-            alert('Error fetching results')
+            alert('La città non esiste')
           }
         } catch (error) {
           console.log(error)
@@ -43,7 +43,7 @@ function CardWeather() {
   return (
 
     <Container className="d-flex flex-column justify-content-center align-items-center p-0">
-      <Row md={3} className='flex-column align-items-start mb-4'>
+      <Row md={8} className='flex-column align-items-start mb-4'>
         <Col md={12} className="text-center">
         <h1 className='cardWeather bg-secondary text-light p-2'><strong>{currentCityName},  {currentCountry.country} </strong></h1>
         </Col>      
@@ -51,20 +51,20 @@ function CardWeather() {
           <h3 className='cardWeather  bg-secondary text-light description px-3 m-3'>{currentWeather.description} <span><img src={`http://openweathermap.org/img/wn/${currentWeather.icon}@2x.png`} alt="CurrentIcon" /></span></h3>
         </Col>
       </Row>
-      <Row md={6}>
-        <Col md={5} className='cardWeather  p-2 mx-1 my-2 d-flex flex-column justify-content-center align-items-center'>
-           <h5> Attuale</h5>
+      <Row className="d-flex justify-content-center w-100">
+        <Col md={3} className='cardWeather  p-2 mx-3 my-2 d-flex flex-column justify-content-center align-items-center'>
+           <h5> Attuale:</h5>
            <h3>{currentTemp.temp}°</h3> 
-           <h5> Percepita</h5>
+           <h5> Percepita:</h5>
            <h3>{currentTemp.feels_like}°</h3>                      
         </Col>
-        <Col md={5} className='cardWeather  p-2  mx-1 my-2  d-flex flex-column justify-content-center align-items-center'>
-           <h5> Minima</h5>
+        <Col md={3} className='cardWeather  p-2  mx-3 my-2  d-flex flex-column justify-content-center align-items-center'>
+           <h5> Min:</h5>
            <h3>{currentTemp.temp_min}°</h3>
-           <h5> Massima</h5>
+           <h5> MAX:</h5>
            <h3>{currentTemp.temp_max}°</h3>                     
         </Col>
-        <Col md={5} className='cardWeather  p-2 mx-1 my-2  d-flex flex-column justify-content-center align-items-center'>
+        <Col md={3} className='cardWeather  p-2 mx-3 my-2  d-flex flex-column justify-content-center align-items-center'>
            <h5> Vento</h5>
            <h3>{currentWind.speed} km/h</h3>
            <h5> Pressione</h5>
@@ -79,21 +79,4 @@ function CardWeather() {
 export default CardWeather;
 
 
-  {/* <Card style={{ width: '18rem' }} className="text-center bg-dark">
-      <Card.Body key={weatherContent.city.id}>
-        <Card.Title className='text-light'><h3><strong>{currentCityName}, {currentCountry.country}</strong></h3></Card.Title>
-        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>Temperatura:{currentTemp.temp}°</Card.Text>
-        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>Min:{currentTemp.temp_min}°</Card.Text>
-        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>Max:{currentTemp.temp_max}°</Card.Text>
-        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>Percepita:{currentTemp.feels_like}°</Card.Text>
-        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>Lat: {currentLat} ° Lon: {currentLon} °</Card.Text>
-        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>{currentWeather[0].main}</Card.Text>
-        <Card.Text className='rounded text-center p-2 bg-secondary text-light'>{currentWeather[0].descriptions}</Card.Text>
-
-        <Button variant="success" onClick={()=>{dispatch({
-         type: "ADD_TO_FAV",
-         payload: weatherContent
-    })}}>Aggiungi ai preferiti</Button>
-      </Card.Body>
-
-    </Card> */}
+ 

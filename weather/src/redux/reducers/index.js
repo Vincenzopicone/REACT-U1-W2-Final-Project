@@ -6,6 +6,7 @@ const initialState = {
   temp: {},
   wind: {},
   search: {},
+  next5Days: null,
 };
 
 const appReducer = (state = initialState, action) => {
@@ -57,6 +58,9 @@ const appReducer = (state = initialState, action) => {
         ...state,
         search: action.payload,
       });
+
+    case "NEXT_5_DAYS":
+      return { ...state, next5Days: action.payload };
 
     /* case "CURRENT":
       return (state = {
