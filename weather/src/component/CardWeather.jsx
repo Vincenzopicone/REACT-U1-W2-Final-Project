@@ -54,15 +54,15 @@ function CardWeather() {
       <Row className="d-flex justify-content-center w-100">
         <Col md={3} className='cardWeather  p-2 mx-3 my-2 d-flex flex-column justify-content-center align-items-center'>
            <h5> Attuale:</h5>
-           <h3>{currentTemp.temp}°</h3> 
+           <h3>{currentTemp?.temp?.toPrecision(2)}°</h3> 
            <h5> Percepita:</h5>
-           <h3>{currentTemp.feels_like}°</h3>                      
+           <h3>{currentTemp?.feels_like?.toPrecision(2)}°</h3>                      
         </Col>
         <Col md={3} className='cardWeather  p-2  mx-3 my-2  d-flex flex-column justify-content-center align-items-center'>
            <h5> Min:</h5>
-           <h3>{currentTemp.temp_min}°</h3>
+           <h3>{currentTemp?.temp_min?.toPrecision(2)}°</h3>
            <h5> MAX:</h5>
-           <h3>{currentTemp.temp_max}°</h3>                     
+           <h3>{currentTemp?.temp_max?.toPrecision(2)}°</h3>                     
         </Col>
         <Col md={3} className='cardWeather  p-2 mx-3 my-2  d-flex flex-column justify-content-center align-items-center'>
            <h5> Vento</h5>

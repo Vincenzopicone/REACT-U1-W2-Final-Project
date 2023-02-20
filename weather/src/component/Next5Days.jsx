@@ -37,7 +37,7 @@ function Next5Days() {
         {Next5Days &&
         Next5Days.list.filter((e, i) => i % 8 === 0)
         .map ((day, i) => (
-            <section className="cardWeather cardFuture bg-secondary text-light d-flex flex-column p-3 m-2 text-center">
+            <section className="cardWeather cardFuture bg-secondary text-light d-flex flex-column p-3 m-2 text-center" key={`key-${i}`}>
             <h5>Fra {i+1} giorno</h5>
             <article>
                 <p>Temperatura:</p>
